@@ -93,7 +93,7 @@ docker build -t llm-test-runner:0.1 -f docker/Dockerfile.runner .
 
 ## 真实开源目标
 
-已在 `targets/boltons` 准备 boltons **25.0.0** 的原始源码，版本固定为 `c23dbdadb6fecdf505eb4231559561913b84c13f`，保留原许可证。测试对象是 `boltons/mathutils.py`，原有回归集是 `tests/test_mathutils.py`。
+已在 `targets/boltons` 准备 boltons **25.0.0** 的原始源码，版本固定为 [`c23dbdadb6fecdf505eb4231559561913b84c13f`](https://github.com/mahmoud/boltons/tree/c23dbdadb6fecdf505eb4231559561913b84c13f)（点击查看本次固定版本的完整源码），保留原许可证。测试对象是 `boltons/mathutils.py`，原有回归集是 `tests/test_mathutils.py`。
 
 `examples/boltons-contracts.json` 定义 clamp、ceil、floor 和 Bits 的接口约定。验收中澄清了索引方向、十六进制前导零及零位字符串格式未约定的边界；补充阶段保存了单独的约定快照，最初配置快照保持原样。原始 boltons 文件未修改，已验证补丁仅保存在运行工作副本中。
 
