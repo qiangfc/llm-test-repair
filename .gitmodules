@@ -1,0 +1,3 @@
+[submodule "targets/boltons"]
+	path = targets/boltons
+	url = https://github.com/mahmoud/boltons.git

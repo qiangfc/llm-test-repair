@@ -1,0 +1,6 @@
+FROM python:3.11-slim
+RUN python -m pip install --no-cache-dir "pytest>=8.3,<9" "coverage>=7.6,<8"
+ENV PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
+WORKDIR /workspace
+# Only the standalone worker runs here; API requests remain in the host controller.
+# For other targets, build a derived image with their dependencies preinstalled.

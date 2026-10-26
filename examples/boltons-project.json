@@ -1,0 +1,23 @@
+{
+  "name": "boltons 25.0.0 / mathutils",
+  "project_path": "../targets/boltons",
+  "repository_url": "https://github.com/mahmoud/boltons",
+  "revision": "c23dbdadb6fecdf505eb4231559561913b84c13f",
+  "source_paths": ["boltons/mathutils.py"],
+  "test_paths": ["tests/test_mathutils.py"],
+  "python_paths": ["."],
+  "contracts_file": "boltons-contracts.json",
+  "backend": "docker",
+  "docker_image": "llm-test-runner:0.1",
+  "max_rounds": 3,
+  "max_tests_per_round": 6,
+  "stagnation_rounds": 2,
+  "target_line_coverage": 90,
+  "target_branch_coverage": 80,
+  "repeat_tests": 2,
+  "auto_repair": true,
+  "confirmation_policy": "llm",
+  "min_defect_confidence": 0.9,
+  "max_repair_attempts": 2,
+  "max_changed_lines": 100
+}

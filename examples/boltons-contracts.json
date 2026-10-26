@@ -1,0 +1,42 @@
+{
+  "specification_source": "boltons 25.0.0 mathutils 的公开接口说明/docstring 与数值、固定位宽无符号数的基本约定；未预先认定存在缺陷。",
+  "contracts": [
+    {
+      "id": "BOL-MATH-CLAMP", "module": "boltons.mathutils", "symbol": "clamp",
+      "signature": "clamp(x, lower=float('-inf'), upper=float('inf'))",
+      "source_file": "boltons/mathutils.py",
+      "description": "将可比较的数值 x 限制在 lower 与 upper 指定的闭区间中。",
+      "expected_behavior": ["区间内的 x 保持原值；小于 lower 返回 lower；大于 upper 返回 upper。", "upper 小于 lower 时抛出 ValueError。", "整数与浮点数可以混用；省略两个边界时有限数值保持原值。"],
+      "normal_examples": ["clamp(1.0, 0, 5) == 1.0", "clamp(-1.0, 0, 5) == 0", "clamp(101.0, 0, 5) == 5"],
+      "boundary_cases": ["x 等于 lower 或 upper 时保留端点；lower 等于 upper 时返回该端点。"],
+      "exception_cases": ["clamp(1, 5, 0) 必须抛出 ValueError。"]
+    },
+    {
+      "id": "BOL-MATH-CEIL", "module": "boltons.mathutils", "symbol": "ceil",
+      "signature": "ceil(x, options=None)", "source_file": "boltons/mathutils.py",
+      "description": "无 options 时按 math.ceil 向上取整；有 options 时返回候选集合中大于等于 x 的最小值。",
+      "expected_behavior": ["options 可为未排序的数值迭代对象，结果不受输入顺序影响。", "候选值等于 x 时返回该值；没有大于等于 x 的候选值时抛出 ValueError。", "不提供 options 时结果与 Python 标准库 math.ceil 相同。"],
+      "normal_examples": ["ceil(3.5, [1.5, 2.5, 4, 6]) == 4", "ceil(-1.2) == -1"],
+      "boundary_cases": ["ceil(4, [1.5, 4, 6]) == 4；重复值和单元素候选集合依旧满足最小候选值约定。"],
+      "exception_cases": ["ceil(7, [1, 4, 6]) 抛出 ValueError；空候选集合抛出 ValueError。"]
+    },
+    {
+      "id": "BOL-MATH-FLOOR", "module": "boltons.mathutils", "symbol": "floor",
+      "signature": "floor(x, options=None)", "source_file": "boltons/mathutils.py",
+      "description": "无 options 时按 math.floor 向下取整；有 options 时返回候选集合中小于等于 x 的最大值。",
+      "expected_behavior": ["options 可为未排序的数值迭代对象，结果不受输入顺序影响。", "候选值等于 x 时返回该值；没有小于等于 x 的候选值时抛出 ValueError。", "不提供 options 时结果与 Python 标准库 math.floor 相同。"],
+      "normal_examples": ["floor(3.5, [1.5, 2.5, 4, 6]) == 2.5", "floor(-1.2) == -2"],
+      "boundary_cases": ["floor(2.5, [1.5, 2.5, 4]) == 2.5；重复值和单元素候选集合依旧满足最大候选值约定。"],
+      "exception_cases": ["floor(0, [1, 4, 6]) 抛出 ValueError；空候选集合抛出 ValueError。"]
+    },
+    {
+      "id": "BOL-MATH-BITS", "module": "boltons.mathutils", "symbol": "Bits",
+      "signature": "Bits(val=0, len_=None)", "source_file": "boltons/mathutils.py",
+      "description": "不可变的无符号固定位宽比特序列，支持整数、二进制字符串、0x 十六进制字符串、布尔列表输入，以及公开的 as_int、as_bin、as_list、索引与切片接口。",
+      "expected_behavior": ["显式指定 n 位时，非负整数必须可由 n 位表示，即 0 <= val < 2**n；超出位宽应抛出 ValueError。这是固定位宽无符号数约定，验收时需人工复核该接口解释。", "len 返回指定的位数；as_int 返回整数；as_bin 返回保留前导零的二进制字符串。", "负整数抛出 ValueError；不支持的输入类型抛出 TypeError。", "合法非负索引返回对应的 bool，比最高合法索引更大的索引抛出 IndexError；切片返回新的 Bits。"],
+      "normal_examples": ["Bits('0010').as_int() == 2，len(Bits('0010')) == 4", "Bits([True, False]).as_bin() == '10'", "Bits(2, 4).as_bin() == '0010'", "索引从左至右，Bits('0010')[2] is True，Bits('0010')[3] is False；Bits('0010')[1:3].as_bin() == '01'。", "十六进制每个数字对应 4 位并保留前导零；Bits('0x0f').as_bin() == '00001111'，len 为 8，as_list 为 [False, False, False, False, True, True, True, True]。"],
+      "boundary_cases": ["2 位可表示的最大整数是 3；显式 0 位只能表示整数 0；保留字符串输入的前导零。", "0 位对象的 as_bin 字符串格式没有约定，不对其断言空字符串；只检查其整数值和 len。"],
+      "exception_cases": ["Bits(-1) 抛出 ValueError；Bits(4, 2) 应根据位宽约定抛出 ValueError；Bits(None) 抛出 TypeError。"]
+    }
+  ]
+}

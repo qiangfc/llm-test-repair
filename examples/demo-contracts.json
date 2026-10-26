@@ -1,0 +1,22 @@
+{
+  "contracts": [
+    {
+      "id": "DEMO-DISCOUNT", "module": "demo_calc", "symbol": "discount_total",
+      "signature": "discount_total(amount, rate)", "source_file": "src/demo_calc/__init__.py",
+      "description": "amount 为非负数字，rate 为闭区间 [0, 1] 内的数字，计算折扣后的金额。",
+      "expected_behavior": ["结果为 amount * (1 - rate)。", "rate 等于 1 是合法输入，结果应为 0。", "负金额或区间外折扣率抛出 ValueError。", "非数字参数抛出 TypeError。"],
+      "normal_examples": ["discount_total(100, 0.2) == 80"],
+      "boundary_cases": ["discount_total(100, 0) == 100；discount_total(100, 1) == 0；零金额返回零。"],
+      "exception_cases": ["负金额、负折扣率、折扣率大于 1 抛出 ValueError；None 参数抛出 TypeError。"]
+    },
+    {
+      "id": "DEMO-MEAN", "module": "demo_calc", "symbol": "mean",
+      "signature": "mean(values)", "source_file": "src/demo_calc/__init__.py",
+      "description": "计算非空数字序列的算术平均值。",
+      "expected_behavior": ["返回所有数字的和除以序列长度。", "空序列必须抛出 ValueError，不能产生 ZeroDivisionError。", "None 或包含非数字元素的序列抛出 TypeError。"],
+      "normal_examples": ["mean([2, 4]) == 3"],
+      "boundary_cases": ["单元素序列返回该元素；可包含负数和零。"],
+      "exception_cases": ["mean([]) 抛出 ValueError；mean(None) 和 mean(['x']) 抛出 TypeError。"]
+    }
+  ]
+}

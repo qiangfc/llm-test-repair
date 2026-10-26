@@ -1,0 +1,16 @@
+{
+  "name": "人工注入缺陷演示项目（不是开源项目验收）",
+  "project_path": "demo_project",
+  "repository_url": "",
+  "revision": "demo-seeded-v1",
+  "source_paths": ["src/demo_calc"],
+  "test_paths": ["tests"],
+  "python_paths": ["src"],
+  "contracts_file": "demo-contracts.json",
+  "backend": "docker",
+  "max_rounds": 3,
+  "max_tests_per_round": 6,
+  "repeat_tests": 2,
+  "auto_repair": true,
+  "confirmation_policy": "llm"
+}

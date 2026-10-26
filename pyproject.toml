@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-test-tool"
+version = "0.1.0"
+description = "CoverUp-based black-box and white-box unit testing with classified repair and regression evidence"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = ["pytest>=8.3,<9", "coverage>=7.6,<8", "python-dotenv>=1.0,<2"]
+
+[project.scripts]
+llm-test-tool = "llm_test_tool.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"llm_test_tool._vendor.coverup" = ["LICENSE"]
